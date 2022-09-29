@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+echo "Replacing env constants in JS"
+
+if [ -f /appFront/src/ports.js ] ; then
+    rm /appFront/src/ports.js
+fi
+
+cp /appFront/src/init.js /appFront/src/ports.js
+
+for file in /appFront/src/ports.js
+do
+  echo "Processing $file ...";
+
+  sed -i 's|VUE_PORT|'${VUE_PORT}'|g' $file
+  sed -i 's|NODE_PORT|'${NODE_PORT}'|g' $file
+
+done
+
